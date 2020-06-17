@@ -13,9 +13,7 @@ nationwide_plot_df <- df %>%
     ungroup() %>%
     filter(new_tests >= 1000, !is.na(new_positive))
 
-# Define UI for application that draws a histogram
 ui <- fluidPage(
-    # Sidebar with a slider input for number of bins 
     fluidRow(
         column(12, align = 'center',
                h2('Share of new COVID-19 tests coming back positive by week', align = 'center'),
@@ -26,8 +24,7 @@ ui <- fluidPage(
     )
 )
 
-# Define server logic required to draw a histogram
-server <- function(input, output) {
+server <- function(input, output, session) {
     
     output$chart <- renderHighchart({
         
@@ -67,6 +64,4 @@ server <- function(input, output) {
     })
 }
 
-# Run the application 
 shinyApp(ui = ui, server = server)
-
