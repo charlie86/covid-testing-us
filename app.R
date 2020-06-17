@@ -4,11 +4,28 @@ library(highcharter)
 
 df <- readRDS('covid-testing-data.rds')
 
+df %>% 
+    group_by(state) %>% 
+    arrange(desc(date)) %>% 
+    slice(1:7) %>% 
+    summarise(new_positive = sum(new_positive, na.rm = TRUE),
+              new_tests = sum(new_tests, na.rm = TRUE),
+              new_positive_rate = new_positive / new_tests) %>%
+    ungroup() %>% 
+    arrange(new_positive_rate) %>% 
+    mutate(formatted_rate = scales::percent(new_positive_rate, accuracy = .1),
+           formatted_count = prettyNum(new_tests, big.mark = ','),
+           state_name = state) %>% 
+    hchart(hcaes(x = state, y = new_positive_rate), type = 'bar') %>% 
+    hc_tooltip(headerFormat = '', 
+               style = list(fontSize = '14px'),
+               pointFormat = HTML('{point.state_name}: <b>{point.formatted_rate}</b> of {point.formatted_count} tests came back positive in the last week'), shared = T)
+
 nationwide_plot_df <- df %>% 
     select(week, new_positive, new_tests) %>%
     group_by(week) %>%
-    summarise(new_positive = sum(new_positive),
-              new_tests = sum(new_tests),
+    summarise(new_positive = sum(new_positive, na.rm = T),
+              new_tests = sum(new_tests, na.rm = T),
               new_positive_rate = new_positive / new_tests) %>%
     ungroup() %>%
     filter(new_tests >= 1000, !is.na(new_positive))
