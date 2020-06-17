@@ -5,7 +5,6 @@ library(tidyverse)
 library(lubridate)
 plan(multiprocess)
 
-
 df <- future_map_dfr(state.name, function(state_name) {
     formatted_state_name <- tolower(gsub(' ', '-', state_name))
     session <- bow(str_glue('https://covidtracking.com/data/state/{formatted_state_name}'))

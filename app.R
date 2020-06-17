@@ -60,7 +60,7 @@ server <- function(input, output, session) {
     
     output$notes <- renderUI({
         HTML(str_glue('Data as of {format(max(df$date), "%B %d, %Y")}. Only weeks when there were at least 1,000 total tests run are included.<br>
-                                         Source: <a href="https://covidtracking.com" target="_blank">The COVID Tracking Project</a>. Code: <a href="https://github.com">GitHub</a>'))
+                                         Source: <a href="https://covidtracking.com" target="_blank">The COVID Tracking Project</a>. Code: <a href="https://github.com/charlie86/covid-testing-us">GitHub</a>'))
     })
 }
 
