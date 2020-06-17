@@ -33,7 +33,7 @@ nationwide_plot_df <- df %>%
 ui <- fluidPage(
     fluidRow(
         column(12, align = 'center',
-               h2('Share of new COVID-19 tests coming back positive by week', align = 'center'),
+               h2('Share of new COVID-19 tests coming back positive by week in the U.S.', align = 'center'),
                selectInput('state', 'Select state(s)', c('Nationwide', state.name), selected = 'Nationwide', multiple = TRUE),
                highchartOutput('chart', height = '600px'),
                uiOutput('notes')
