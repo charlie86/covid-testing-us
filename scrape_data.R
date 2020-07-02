@@ -4,6 +4,7 @@ library(furrr)
 library(polite)
 library(tidyverse)
 library(lubridate)
+library(htmltools)
 plan(multiprocess)
 
 df <- future_map_dfr(c(state.name, 'Puerto Rico', 'District of Columbia'), function(state_name) {
