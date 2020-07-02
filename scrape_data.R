@@ -1,6 +1,7 @@
 library(rgdal)
 library(rvest)
 library(furrr)
+library(scales)
 library(polite)
 library(tidyverse)
 library(lubridate)
