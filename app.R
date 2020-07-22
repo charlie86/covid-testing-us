@@ -113,7 +113,6 @@ server <- function(input, output, session) {
                 hc_plotOptions(line = list(lineWidth = 4))
         }
         
-        
     })
     
     output$notes <- renderUI({
@@ -133,12 +132,17 @@ server <- function(input, output, session) {
                         smoothFactor = 0.5, fillOpacity = 1,
                         color = 'grey', weight = 1,
                         fillColor = ~pal(new_positive_rate),
+                        layerId = ~NAME,
                         label = ~map(label, HTML)
                         ) %>% 
             addLegend(pal = pal, values = states$new_positive_rate, opacity = 1,
                       labFormat = labelFormat(transform = function(x) x * 100, suffix = '%'),
                       title = HTML('Positive test rate'), position = 'bottomright')
         
+    })
+    
+    observeEvent(input$map_shape_click, {
+        updateSelectInput(session, 'state', selected = c(input$state, input$map_shape_click$id))
     })
 }
 
