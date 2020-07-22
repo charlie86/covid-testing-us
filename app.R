@@ -22,6 +22,7 @@ ui <- fluidPage(title = '',
         ),
         column(6, 
                h4('Positive test rate by state - previous seven days', align = 'center'),
+               h6('Click a state to add to time series chart', align = 'center'),
                leafletOutput('map', height = '600px')
                )
         ),
